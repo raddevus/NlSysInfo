@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-namespace NlSysInfo;
+namespace NewLibre;
 
 public class SystemInfo
 {
