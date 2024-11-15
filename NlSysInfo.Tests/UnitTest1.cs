@@ -13,4 +13,13 @@ public class UnitTest1
         }
         // Assert.Contains("teams:5275",allNames);
     }
+
+    [Fact]
+    public void TestProcInfo(){
+        SystemInfo si = new();
+        List<ProcInfo> allPI = si.GetAllProcesses();
+        foreach (ProcInfo p in allPI){
+            Console.WriteLine($"{p.Name} : {p.ProcId} : {p.FileName}");
+        }
+    }
 }

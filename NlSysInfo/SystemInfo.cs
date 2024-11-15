@@ -20,6 +20,23 @@ public class SystemInfo
         return sl;
     }
 
+    public List<ProcInfo> GetAllProcesses(){
+        Process [] allProcs = Process.GetProcesses();
+        List<ProcInfo> allProcInfo = new List<ProcInfo>();
+        foreach (Process p in allProcs)
+        {
+            var stopChar = p.ProcessName.IndexOf(" ");
+            if (stopChar < 1){
+                stopChar = p.ProcessName.Length;
+            }
+            allProcInfo.Add(new ProcInfo(p.ProcessName.Substring(0,stopChar), p.MainModule?.FileName ?? "", p.Id));
+            
+        }
+        allProcInfo.Sort((pi1, pi2) => pi1.Name.CompareTo( pi2.Name));
+        return allProcInfo;
+    }
+
+
     public List<string> GetAllProcModules(string targetProcName){
         // Get all the modules that a specific process loads
         Process [] allProcs = Process.GetProcesses();
