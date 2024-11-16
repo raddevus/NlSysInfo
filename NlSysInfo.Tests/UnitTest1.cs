@@ -19,7 +19,7 @@ public class UnitTest1
         SystemInfo si = new();
         List<ProcInfo> allPI = si.GetAllProcesses();
         foreach (ProcInfo p in allPI){
-            Console.WriteLine($"{p.Name} : {p.ProcId} : {p.FileName}");
+            Console.WriteLine($"{p.Name} : {p.ProcId} : {p.FileName} : {p.FileSize} : {p.FileHash}");
         }
     }
 }

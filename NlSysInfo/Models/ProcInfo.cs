@@ -4,10 +4,51 @@ public class ProcInfo{
     public string FileName{get;set;}
     public int ProcId{get;set;}
 
+    public string FileHash{get;set;}
+
+    public long FileSize{get;set;}
+
     public ProcInfo(String name, String filename, int procId)
     {
         Name = name;
         FileName = filename;
         ProcId = procId;
+        try{
+            //FileHash = Utils.BytesToHex(File.ReadAllBytes(FileName));
+            FileInfo fi = new FileInfo(FileName);
+            FileSize = fi.Length;
+            try{
+                FileHash = GetHashFromFileBytes(FileName, (int)fi.Length);
+                //Console.WriteLine($"{FileHash}");
+            }
+            catch(Exception ex){
+                throw ex;
+            }
+            //FileHash = Utils.BytesToHex(File.ReadAllBytes(fi.FullName));
+        }
+        catch (Exception ex){
+            // leave the FileHash blank if you can't read the file
+            Console.WriteLine($"FAIL! : {ex.Message}");
+        }
+    }
+
+    private string GetHashFromFileBytes(string targetFile, int byteLength){
+        var reader = new FileStream(targetFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+         char[] allBytes = new char[byteLength];
+        using (FileStream fs = new FileStream(targetFile, 
+                                      FileMode.Open, 
+                                      FileAccess.Read,    
+                                      FileShare.ReadWrite))
+        {
+            using (StreamReader sr = new StreamReader(fs))
+            {
+                sr.Read(allBytes,0,byteLength);
+            }
+        }
+        
+        return Utils.GenSha256(System.Text.Encoding.UTF8.GetBytes(allBytes));
+        //return Utils.GenSha256(targetFile);
+        
     }
 }
