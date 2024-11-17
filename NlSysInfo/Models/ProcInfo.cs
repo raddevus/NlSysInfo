@@ -14,17 +14,10 @@ public class ProcInfo{
         FileName = filename;
         ProcId = procId;
         try{
-            //FileHash = Utils.BytesToHex(File.ReadAllBytes(FileName));
             FileInfo fi = new FileInfo(FileName);
             FileSize = fi.Length;
-            try{
-                FileHash = GetHashFromFileBytes(FileName, (int)fi.Length);
-                //Console.WriteLine($"{FileHash}");
-            }
-            catch(Exception ex){
-                throw ex;
-            }
-            //FileHash = Utils.BytesToHex(File.ReadAllBytes(fi.FullName));
+            
+            FileHash = GetHashFromFileBytes(FileName, (int)fi.Length);
         }
         catch (Exception ex){
             // leave the FileHash blank if you can't read the file
