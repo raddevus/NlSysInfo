@@ -36,7 +36,6 @@ public class SystemInfo
         return allProcInfo;
     }
 
-
     public List<string> GetAllProcModules(string targetProcName){
         // Get all the modules that a specific process loads
         Process [] allProcs = Process.GetProcesses();
@@ -49,27 +48,6 @@ public class SystemInfo
             }
         }
         return new List<string>();
-    }
-
-    public string GetProcFileName(int procId){
-        
-        Process [] allProcs = Process.GetProcesses();
-        foreach (Process p in allProcs){
-            if (p.Id == procId){
-                DisplayMainWindowTitle(procId);
-                Console.WriteLine("### GOT THE PROC #####!");
-                try{
-                Console.WriteLine($"{p.MainModule.FileName}");
-                return p.MainModule.FileName;
-                //return p.PrivateMemorySize.ToString("N0");
-                }
-                catch (Exception ex){
-                    Console.WriteLine($"Failed: {ex.Message}");
-                    return string.Empty;
-                }
-            }
-        }
-        return "Couldn't get title";
     }
 
     private void DisplayMainWindowTitle(int procId){
