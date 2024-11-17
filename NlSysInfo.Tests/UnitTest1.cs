@@ -22,4 +22,10 @@ public class UnitTest1
             Console.WriteLine($"{p.Name} : {p.ProcId} : {p.FileName} : {p.FileSize:N0} : {p.FileHash}");
         }
     }
+    
+    [Fact]
+    public void GetWindowTitle(){
+        SystemInfo si = new();
+        si.DisplayMainWindowTitle(18634);
+    }
 }

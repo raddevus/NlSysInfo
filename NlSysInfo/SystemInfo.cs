@@ -50,7 +50,7 @@ public class SystemInfo
         return new List<string>();
     }
 
-    private void DisplayMainWindowTitle(int procId){
+    public void DisplayMainWindowTitle(int procId){
         Process [] allProcs = Process.GetProcesses();
         foreach (Process p in allProcs){
             if (p.Id == procId){
