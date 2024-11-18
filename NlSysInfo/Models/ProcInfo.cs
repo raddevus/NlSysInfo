@@ -14,10 +14,11 @@ public class ProcInfo{
         FileName = filename;
         ProcId = procId;
         try{
-            FileInfo fi = new FileInfo(FileName);
-            FileSize = fi.Length;
-            
-            FileHash = GetHashFromFileBytes(FileName, (int)fi.Length);
+            if (FileName != null && FileName != String.Empty){
+                FileInfo fi = new FileInfo(FileName);
+                FileSize = fi.Length;
+                FileHash = GetHashFromFileBytes(FileName);
+            }
         }
         catch (Exception ex){
             // leave the FileHash blank if you can't read the file
@@ -25,23 +26,7 @@ public class ProcInfo{
         }
     }
 
-    private string GetHashFromFileBytes(string targetFile, int byteLength){
-        var reader = new FileStream(targetFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-
-         char[] allBytes = new char[byteLength];
-        using (FileStream fs = new FileStream(targetFile, 
-                                      FileMode.Open, 
-                                      FileAccess.Read,    
-                                      FileShare.ReadWrite))
-        {
-            using (StreamReader sr = new StreamReader(fs))
-            {
-                sr.Read(allBytes,0,byteLength);
-            }
-        }
-        
-        return Utils.GenSha256(System.Text.Encoding.UTF8.GetBytes(allBytes));
-        //return Utils.GenSha256(targetFile);
-        
+    private string GetHashFromFileBytes(string targetFile){
+        return Utils.GenSha256(targetFile);
     }
 }
