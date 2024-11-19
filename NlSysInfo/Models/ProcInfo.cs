@@ -17,13 +17,18 @@ public class ProcInfo{
             if (FileName != null && FileName != String.Empty){
                 FileInfo fi = new FileInfo(FileName);
                 FileSize = fi.Length;
-                FileHash = GetHashFromFileBytes(FileName);
             }
         }
         catch (Exception ex){
-            // leave the FileHash blank if you can't read the file
             Console.WriteLine($"FAIL! : {ex.Message}");
         }
+    }
+
+    public string GenSha256Hash(){
+        if (String.IsNullOrEmpty(FileName)){
+            return String.Empty;
+        }
+        return GetHashFromFileBytes(FileName);
     }
 
     private string GetHashFromFileBytes(string targetFile){

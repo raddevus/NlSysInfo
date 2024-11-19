@@ -22,6 +22,15 @@ public class UnitTest1
             Console.WriteLine($"{p.Name} : {p.ProcId} : {p.FileName} : {p.FileSize:N0} : {p.FileHash}");
         }
     }
+
+    [Fact]
+    public void TestGenHash(){
+        SystemInfo si = new();
+        List<ProcInfo> allPI = si.GetAllProcesses();
+        foreach (ProcInfo p in allPI.Where(pi => pi.FileName != String.Empty)){
+            Console.WriteLine($"## GenHash ## {p.Name} : {p.GenSha256Hash()}");
+        }
+    }
     
     [Fact]
     public void GetWindowTitle(){
