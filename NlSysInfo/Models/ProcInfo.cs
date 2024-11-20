@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace NewLibre;
 public class ProcInfo{
     public string Name{get;set;}
@@ -24,6 +26,18 @@ public class ProcInfo{
         }
     }
 
+    public long GetWorkingSet(){
+        // ### From Copilot  ###
+        // what is working set memory?
+        // Working set memory refers to the amount of physical memory (RAM) 
+        // that a process is currently using and is actively being used by 
+        // the process. This includes both the private memory allocated by 
+        // the process and the memory shared with other processes.
+        var proc = Process.GetProcessById(ProcId);
+        return proc.WorkingSet64;
+
+    }
+    
     public string GenSha256Hash(){
         if (String.IsNullOrEmpty(FileName)){
             return String.Empty;
