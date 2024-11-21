@@ -29,8 +29,12 @@ public class SystemInfo
             if (stopChar < 1){
                 stopChar = p.ProcessName.Length;
             }
-            allProcInfo.Add(new ProcInfo(p.ProcessName.Substring(0,stopChar), p.MainModule?.FileName ?? "", p.Id));
-            
+            try{
+                allProcInfo.Add(new ProcInfo(p.ProcessName.Substring(0,stopChar), p.MainModule?.FileName ?? "", p.Id));
+            }
+            catch(Exception ex){
+                Console.WriteLine($"Couldn't access process to get module. {ex.Message}");
+            }
         }
         allProcInfo.Sort((pi1, pi2) => pi1.Name.CompareTo( pi2.Name));
         return allProcInfo;
