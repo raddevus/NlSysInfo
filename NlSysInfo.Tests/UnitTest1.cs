@@ -19,7 +19,7 @@ public class UnitTest1
         SystemInfo si = new();
         List<ProcInfo> allPI = si.GetAllProcesses();
         foreach (ProcInfo p in allPI){
-            Console.WriteLine($"{p.Name} : {p.ProcId} : {p.FileName} : {p.FileSize:N0} : {p.FileHash}");
+            Console.WriteLine($"{p.Name} : {p.ProcId} : {p.Filename} : {p.FileSize:N0} : {p.FileHash}");
         }
     }
 
@@ -27,7 +27,7 @@ public class UnitTest1
     public void TestGenHash(){
         SystemInfo si = new();
         List<ProcInfo> allPI = si.GetAllProcesses();
-        foreach (ProcInfo p in allPI.Where(pi => pi.FileName != String.Empty)){
+        foreach (ProcInfo p in allPI.Where(pi => pi.Filename != String.Empty)){
             Console.WriteLine($"## GenHash ## {p.Name} : {p.GenSha256Hash()}");
         }
     }

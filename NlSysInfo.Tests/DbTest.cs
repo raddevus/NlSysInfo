@@ -8,4 +8,12 @@ public class DbTest
         ProcInfoContext pic = new();
         
     }
+
+    [Fact]
+    public void AddOneRecord(){
+        ProcInfo pi = new ("test-proc", "/usr/bin/bash", 1);
+        ProcInfoContext pic = new();
+        pic.Add(pi);
+        pic.SaveChanges();
+    }
 }

@@ -2,8 +2,9 @@ using System.Diagnostics;
 
 namespace NewLibre;
 public class ProcInfo{
+    public Int32 Id{get;set;}
     public string Name{get;set;}
-    public string FileName{get;set;}
+    public string Filename{get;set;}
     public int ProcId{get;set;}
 
     public string FileHash{get;set;}
@@ -13,11 +14,11 @@ public class ProcInfo{
     public ProcInfo(String name, String filename, int procId)
     {
         Name = name;
-        FileName = filename;
+        Filename = filename;
         ProcId = procId;
         try{
-            if (FileName != null && FileName != String.Empty){
-                FileInfo fi = new FileInfo(FileName);
+            if (Filename != null && Filename != String.Empty){
+                FileInfo fi = new FileInfo(Filename);
                 FileSize = fi.Length;
             }
         }
@@ -39,10 +40,10 @@ public class ProcInfo{
     }
     
     public string GenSha256Hash(){
-        if (String.IsNullOrEmpty(FileName)){
+        if (String.IsNullOrEmpty(Filename)){
             return String.Empty;
         }
-        return GetHashFromFileBytes(FileName);
+        return GetHashFromFileBytes(Filename);
     }
 
     private string GetHashFromFileBytes(string targetFile){

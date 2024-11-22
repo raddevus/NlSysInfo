@@ -42,9 +42,10 @@ public class ProcInfoContext : DbContext
             (
             [ID] INTEGER NOT NULL PRIMARY KEY,
             [Name] NVARCHAR(250) NOT NULL check(length(Name) <= 250),
+            [ProcId] INTEGER,
             [FileName] NVARCHAR(1024) NOT NULL check(length(FileName) <= 1024),
             [FileSize] BIGINT, 
-            [FileHash] NVARCHAR(64) NOT NULL check(length(FileHash) <= 64),
+            [FileHash] NVARCHAR(64) NULL check(length(FileHash) <= 64),
             [Created] NVARCHAR(30) default (datetime('now','localtime')) 
                       check(length(Created) <= 30)
             )"
