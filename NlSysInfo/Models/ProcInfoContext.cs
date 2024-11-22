@@ -31,6 +31,7 @@ public class ProcInfoContext : DbContext
                 command.ExecuteNonQuery();
             }
         }
+        Console.WriteLine($"{DbPath}");
     }
 
     // configures the database for use by EF
