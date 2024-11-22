@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
 
 namespace NewLibre;
-public class ProcInfoContext : DbContext
+public class SnapshotContext : DbContext
 {
     // The variable name must match the name of the table.
-    public DbSet<ProcInfo> ProcInfo { get; set; }
+    public DbSet<ProcInfo> Snapshot { get; set; }
     
     public string DbPath { get; }
 
-    public ProcInfoContext()
+    public SnapshotContext()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);

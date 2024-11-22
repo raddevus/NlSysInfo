@@ -34,4 +34,10 @@ public class DbTest
         FileNotFoundException exception = Assert.Throws<FileNotFoundException>(act);
         
     }
+
+    [Fact]
+    public void BadPids(){
+        ProcInfoService pis = new();
+        pis.SaveAllProcs(new int[]{1,2,3,11660});
+    }
 }

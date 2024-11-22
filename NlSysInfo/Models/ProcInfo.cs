@@ -13,6 +13,13 @@ public class ProcInfo{
 
     public ProcInfo(String name, String filename, int procId)
     {
+        name = name.Trim();
+        if (!String.IsNullOrEmpty(name)){
+            var endIdx = name.IndexOf(' ');
+            if (endIdx > 0){
+                name = name.Substring(0,endIdx);
+            }
+        }
         Name = name;
         Filename = filename;
         ProcId = procId;
@@ -50,5 +57,9 @@ public class ProcInfo{
 
     private string GetHashFromFileBytes(string targetFile){
         return Utils.GenSha256(targetFile);
+    }
+
+    public static Process GetProcById(int pid){
+        return Process.GetProcessById(pid);
     }
 }
