@@ -16,4 +16,22 @@ public class DbTest
         pic.Add(pi);
         pic.SaveChanges();
     }
+
+    [Fact]
+    public void AddWithHash(){
+        ProcInfo pi = new ("test-proc", "/usr/bin/bash", 1);
+        ProcInfoContext pic = new();
+        pi.GenSha256Hash();
+        pic.Add(pi);
+        pic.SaveChanges();
+    }
+
+
+    [Fact]
+    public void FileDoesntExistEx(){
+        
+        Action act = () => new ProcInfo("test-proc", "/usr/bin/fakefile", 1);
+        FileNotFoundException exception = Assert.Throws<FileNotFoundException>(act);
+        
+    }
 }

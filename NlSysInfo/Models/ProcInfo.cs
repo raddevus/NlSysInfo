@@ -23,7 +23,8 @@ public class ProcInfo{
             }
         }
         catch (Exception ex){
-            Console.WriteLine($"FAIL! : {ex.Message}");
+            Console.WriteLine($"FAIL! : {ex.GetType().ToString()}:{ex.Message}");
+            throw ex;
         }
     }
 
@@ -43,7 +44,8 @@ public class ProcInfo{
         if (String.IsNullOrEmpty(Filename)){
             return String.Empty;
         }
-        return GetHashFromFileBytes(Filename);
+        FileHash = GetHashFromFileBytes(Filename);
+        return FileHash;
     }
 
     private string GetHashFromFileBytes(string targetFile){
