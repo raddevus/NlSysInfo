@@ -25,7 +25,13 @@ public class DbTest
 
     [Fact]
     public void AddWithHash(){
-        ProcInfo pi = new ("test-proc", "/usr/bin/bash", 1);
+        ProcInfo pi;
+        if (File.Exists("/usr/bin/bash")){
+           pi = new ("linux-1", "/usr/bin/bash", 1);
+        }
+        else{
+            pi = new ("macOS-1","/bin/zsh",2);
+        }
         ProcInfoContext pic = new();
         pi.GenSha256Hash();
         pic.Add(pi);
