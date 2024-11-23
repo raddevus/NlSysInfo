@@ -11,8 +11,9 @@ public class ProcInfoService{
     public bool SaveAllProcs(int [] allProcIds){
         foreach (int pid in allProcIds){
             Console.WriteLine($"** Saving ProcId: {pid}");
-            Process p = ProcInfo.GetProcById(pid);
+            
             try {
+                Process p = ProcInfo.GetProcById(pid);
                 var filename = p.MainModule.FileName;
                 Console.WriteLine($"** Got filename: {filename}");
                 ProcInfo pi = new (p.ProcessName, filename,p.Id);
