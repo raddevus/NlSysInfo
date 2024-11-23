@@ -1,7 +1,9 @@
 ## Db Creation
 Data base is created at special folder LocalApplicationData
 which is at:<br>
- `/home/user-name/.local/share` on Ubuntu / Linux
+ `/home/user-name/.local/share` on Ubuntu / Linux<br>
+Path on macOS<br>
+`/Users/rogerdeutsch/Library/Application Support/nlsysinfo.db`
 
 ## Run Tests On Only One Class
 - `dotnet test --filer <test-class-name>`
