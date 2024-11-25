@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO.Enumeration;
 
 namespace NewLibre;
-public class ProcInfoService{
+public class SnapshotService{
     public bool SaveProcInfo(){
         return true;
     }
