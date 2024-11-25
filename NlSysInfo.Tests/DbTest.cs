@@ -52,8 +52,8 @@ public class DbTest
 
     [Fact]
     public void BadPids(){
-        ProcInfoService pis = new();
-        pis.SaveAllProcs(new int[]{1,2,3,10406,10727});
+        SnapshotService snapsvc = new();
+        snapsvc.SaveAllProcs(new int[]{1,2,3,10406,10727});
     }
 
     [Fact]
@@ -85,8 +85,8 @@ public class DbTest
             }
         }
         Console.WriteLine();
-        ProcInfoService pis = new();
-        pis.SaveAllProcs(allPids.ToArray());
+        SnapshotService snapsvc = new();
+        snapsvc.SaveAllProcs(allPids.ToArray());
 
         foreach (string s in nameTrack){
             Console.WriteLine(s);
