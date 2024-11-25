@@ -10,6 +10,8 @@ public class ProcInfo{
     public string FileHash{get;set;}
 
     public long FileSize{get;set;}
+    
+    public String? Created{get;set;}
 
     public ProcInfo(String name, String filename, int procId)
     {
@@ -23,6 +25,7 @@ public class ProcInfo{
         Name = name;
         Filename = filename;
         ProcId = procId;
+        Created = DateTime.Now.ToString();
         try{
             if (Filename != null && Filename != String.Empty){
                 FileInfo fi = new FileInfo(Filename);

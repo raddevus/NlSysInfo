@@ -50,6 +50,6 @@ public class DbTest
     [Fact]
     public void BadPids(){
         ProcInfoService pis = new();
-        pis.SaveAllProcs(new int[]{1,2,3,11660});
+        pis.SaveAllProcs(new int[]{1,2,3,10406,10727});
     }
 }

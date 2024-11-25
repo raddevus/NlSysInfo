@@ -9,6 +9,7 @@ public class ProcInfoService{
     }
 
     public bool SaveAllProcs(int [] allProcIds){
+        var snapshotCreated = DateTime.Now.ToString();
         foreach (int pid in allProcIds){
             Console.WriteLine($"** Saving ProcId: {pid}");
             
@@ -17,6 +18,7 @@ public class ProcInfoService{
                 var filename = p.MainModule.FileName;
                 Console.WriteLine($"** Got filename: {filename}");
                 ProcInfo pi = new (p.ProcessName, filename,p.Id);
+                pi.Created = snapshotCreated;
                 Console.WriteLine($"Got pname: {pi.Name}");
                 SnapshotContext sc = new();
                 sc.Add(pi);
