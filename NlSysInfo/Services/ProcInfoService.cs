@@ -17,14 +17,17 @@ public class ProcInfoService{
                 Process p = ProcInfo.GetProcById(pid);
                 var filename = p.MainModule.FileName;
                 Console.WriteLine($"** Got filename: {filename}");
-                ProcInfo pi = new (p.ProcessName, filename,p.Id);
-                pi.Created = snapshotCreated;
-                Console.WriteLine($"Got pname: {pi.Name}");
+                Snapshot ss = new (p.ProcessName, filename);
+                ss.Created = snapshotCreated;
+                ss.FileHash = Utils.GenSha256(filename);
+                Console.WriteLine($"Got pname: {ss.Name}");
                 SnapshotContext sc = new();
-                sc.Add(pi);
+                sc.Add(ss);
                 sc.SaveChanges();
             }
-            catch {} // swallowing failures, considering that pid was bad
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            } // swallowing failures, considering that pid was bad
             
         }
         return true;

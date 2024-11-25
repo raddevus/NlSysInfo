@@ -37,7 +37,7 @@ public class Utils{
             (
             [ID] INTEGER NOT NULL PRIMARY KEY,
             [Name] NVARCHAR(250) NOT NULL check(length(Name) <= 250),
-            [ProcId] INTEGER,
+            [Category] NVARCHAR(250) NULL check(length(Category) <= 250),
             [FileName] NVARCHAR(1024) NOT NULL check(length(FileName) <= 1024),
             [FileSize] BIGINT, 
             [FileHash] NVARCHAR(64) NULL check(length(FileHash) <= 64),

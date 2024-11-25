@@ -8,7 +8,7 @@ namespace NewLibre;
 public class SnapshotContext : DbContext
 {
     // The variable name must match the name of the table.
-    public DbSet<ProcInfo> Snapshot { get; set; }
+    public DbSet<Snapshot> Snapshot { get; set; }
     
     public string DbPath { get; }
 
