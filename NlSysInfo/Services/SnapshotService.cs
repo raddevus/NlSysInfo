@@ -17,13 +17,21 @@ public class SnapshotService{
                 Process p = ProcInfo.GetProcById(pid);
                 var filename = p.MainModule.FileName;
                 Console.WriteLine($"** Got filename: {filename}");
-                Snapshot ss = new (p.ProcessName, filename);
+
+                var procName = ValidateProcName(p.ProcessName, filename);
+
+                Snapshot ss = new (procName, filename);
                 ss.Created = snapshotCreated;
                 ss.FileHash = Utils.GenSha256(filename);
                 Console.WriteLine($"Got pname: {ss.Name}");
                 SnapshotContext sc = new();
-                sc.Add(ss);
-                sc.SaveChanges();
+                try{
+                    sc.Add(ss);
+                    sc.SaveChanges();
+                }
+                catch(Exception ex){
+                    Console.WriteLine($"########--  {ex.Message} : {ex.InnerException?.Message}    --##########");
+                }
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
@@ -31,5 +39,18 @@ public class SnapshotService{
             
         }
         return true;
+    }
+
+    private string ValidateProcName(string name, string filename){
+        if (String.IsNullOrEmpty(name)){
+            if (!String.IsNullOrEmpty(filename)){
+                var beginIdx = filename.LastIndexOf(Path.DirectorySeparatorChar);
+                if (beginIdx > -1){
+                    // +1 in next line is so it doesn't include dirsepchar
+                    name = filename.Substring(beginIdx+1,filename.Length - beginIdx - 1);
+                }
+            }
+        }
+        return name;
     }
 }
