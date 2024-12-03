@@ -5,6 +5,7 @@ public class ProcInfo{
     public Int32 Id{get;set;}
     public string Name{get;set;}
     public string Filename{get;set;}
+    public string? FileDate{get;set;}
     public int ProcId{get;set;}
 
     public string FileHash{get;set;}
@@ -30,6 +31,7 @@ public class ProcInfo{
             if (Filename != null && Filename != String.Empty){
                 FileInfo fi = new FileInfo(Filename);
                 FileSize = fi.Length;
+                FileDate = fi.CreationTime.ToString();
             }
         }
         catch (Exception ex){

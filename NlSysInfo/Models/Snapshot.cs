@@ -6,6 +6,8 @@ public class Snapshot{
     public string Name{get;set;}
     public string Filename{get;set;}
 
+    public string? FileDate{get;set;}
+
     public string? Category{get;set;}
     
     public string FileHash{get;set;}
@@ -30,6 +32,7 @@ public class Snapshot{
             if (Filename != null && Filename != String.Empty){
                 FileInfo fi = new FileInfo(Filename);
                 FileSize = fi.Length;
+                FileDate = fi.CreationTime.ToString();
             }
         }
         catch (Exception ex){

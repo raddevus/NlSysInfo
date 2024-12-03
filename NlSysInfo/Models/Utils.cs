@@ -28,6 +28,7 @@ public class Utils{
             [Name] NVARCHAR(250) NOT NULL check(length(Name) <= 250),
             [ProcId] INTEGER,
             [FileName] NVARCHAR(1024) NOT NULL check(length(FileName) <= 1024),
+            [FileDate] NVARCHAR(30) check(length(FileDate) <= 30),
             [FileSize] BIGINT, 
             [FileHash] NVARCHAR(64) NULL check(length(FileHash) <= 64),
             [Created] NVARCHAR(30) default (datetime('now','localtime')) 
@@ -39,6 +40,7 @@ public class Utils{
             [Name] NVARCHAR(250) NOT NULL check(length(Name) <= 250),
             [Category] NVARCHAR(250) NULL check(length(Category) <= 250),
             [FileName] NVARCHAR(1024) NOT NULL check(length(FileName) <= 1024),
+            [FileDate] NVARCHAR(30) check(length(FileDate) <= 30),
             [FileSize] BIGINT, 
             [FileHash] NVARCHAR(64) NULL check(length(FileHash) <= 64),
             [Created] NVARCHAR(30) default (datetime('now','localtime')) 
