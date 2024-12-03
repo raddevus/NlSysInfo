@@ -12,9 +12,10 @@ Just build and run on any platform
 This project includes tests which will create & write to a sqlite db.
 It will create the sqlite db in your user share using the SpecialFolder LocalApplicationData<br/>
 Ex. (linux) `/home/<user-name>/.local/share` <br/>
+The sqlite filename is: `nlsysinfo.db`
 
-To run the tests, just use : `$ dotnet test`
-If you want to run a specific test use : `$dotnet test --filter DbTest.<name-of-test>`
+To run the tests, just use : `$ dotnet test`<br/>
+If you want to run a specific test use : `$ dotnet test --filter DbTest.<name-of-test>`
 
 ## DiscoProcs Usage
 If you're using this DLL with DiscoProcs then you will need to :
