@@ -8,7 +8,15 @@ public class SnapshotRepoTest{
     [Fact]
     public void GetProcInfo(){
         SnapshotRepository sr = new SnapshotRepository();
-        List<ProcInfo> pi = JsonSerializer.Deserialize<List<ProcInfo>>(sr.GetMatchingSnapshotsByName("bash"));
+        string targetFileName = string.Empty;
+        if (File.Exists("/usr/bin/bash")){
+           targetFileName = "/usr/bin/bash";
+        }
+        else{
+            targetFileName = "/bin/zsh";
+        }
+
+        List<ProcInfo> pi = JsonSerializer.Deserialize<List<ProcInfo>>(sr.GetMatchingSnapshotsByName(targetFileName));
         // print first and last 
         int lastIdx = pi.Count-1;
         if (lastIdx >= 0){

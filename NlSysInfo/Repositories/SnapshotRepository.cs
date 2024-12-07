@@ -18,7 +18,14 @@ public class SnapshotRepository{
             Console.WriteLine($"{i.Created}, {i.FileHash}");
         }
         //Snapshot ss = sc.Set<Snapshot>().Where<Snapshot>();
-        Snapshot ss = new Snapshot("test","/usr/bin/bash");
+        string targetFileName = string.Empty;
+        if (File.Exists("/usr/bin/bash")){
+           targetFileName = "/usr/bin/bash";
+        }
+        else{
+            targetFileName = "/bin/zsh";
+        }
+        Snapshot ss = new Snapshot("test",targetFileName);
         var jsonObject = JsonSerializer.Serialize(allItems);
         Console.WriteLine(jsonObject);
         return jsonObject;
