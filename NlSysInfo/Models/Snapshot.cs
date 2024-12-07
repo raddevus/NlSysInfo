@@ -16,6 +16,10 @@ public class Snapshot{
     
     public String? Created{get;set;}
 
+    public Snapshot (String name){
+         Name = name.Trim();
+
+    }
     public Snapshot(String name, String filename)
     {
         name = name.Trim();
@@ -30,9 +34,11 @@ public class Snapshot{
         Created = DateTime.Now.ToString();
         try{
             if (Filename != null && Filename != String.Empty){
-                FileInfo fi = new FileInfo(Filename);
-                FileSize = fi.Length;
-                FileDate = fi.CreationTime.ToString();
+                if (File.Exists(Filename)){
+                    FileInfo fi = new FileInfo(Filename);
+                    FileSize = fi.Length;
+                    FileDate = fi.CreationTime.ToString();
+                }
             }
         }
         catch (Exception ex){
