@@ -1,4 +1,6 @@
 namespace NlSysInfo.Tests;
+
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -31,5 +33,18 @@ public class SnapshotRepoTest{
         List<ProcInfo> pi = JsonSerializer.Deserialize<List<ProcInfo>>(sr.GetMatchingSnapshotsByName("fake-proc-name"));
                 
         Assert.Equal(0,pi.Count);
+    }
+
+    [Fact]
+    public void KillProcessTest(){
+        // ### More to be done later, because
+        // ### this test requires the valid procId of a process
+        // ### running on the OS 
+        // SnapshotService ss = new();
+        // var osString = Environment.OSVersion.Platform.ToString().ToUpper();
+        // if (osString.Contains("UNIX")){
+        //     Process p = new ("/usr/bin/gnome-text-editor");
+
+        // Console.WriteLine($"Success? {ss.KillProcess(14844)}");
     }
 }

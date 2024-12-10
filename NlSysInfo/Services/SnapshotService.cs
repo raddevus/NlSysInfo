@@ -41,6 +41,13 @@ public class SnapshotService{
         return true;
     }
 
+    public bool KillProcess(int procId){
+        Process p = ProcInfo.GetProcById(procId);
+        p.Kill();
+        p.WaitForExit(2000);
+        return p.HasExited;
+    }
+
     private string ValidateProcName(string name, string filename){
         if (String.IsNullOrEmpty(name)){
             if (!String.IsNullOrEmpty(filename)){
