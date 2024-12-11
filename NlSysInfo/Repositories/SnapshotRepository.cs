@@ -30,4 +30,19 @@ public class SnapshotRepository{
         Console.WriteLine(jsonObject);
         return jsonObject;
     }
+
+    public void ConvertDatesToIso8601(){
+        SnapshotContext sc = new();
+        var allRows = sc.Snapshot.Where<Snapshot>(s => s.Id > 0);
+
+        foreach (Snapshot s in allRows){
+            s.Created = DateTime.Parse(s.Created).ToString("yyyy-MM-dd HH:mm:ss");
+            if ( !String.IsNullOrEmpty(s.FileDate)){
+                s.FileDate = DateTime.Parse(s.FileDate).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            sc.Update(s);
+            sc.SaveChanges();
+            Console.WriteLine($"created: {s.Created} : SAVED!! ");
+        }
+    }
 }
