@@ -26,12 +26,12 @@ public class ProcInfo{
         Name = name;
         Filename = filename;
         ProcId = procId;
-        Created = DateTime.Now.ToString();
+        Created = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         try{
             if (Filename != null && Filename != String.Empty){
                 FileInfo fi = new FileInfo(Filename);
                 FileSize = fi.Length;
-                FileDate = fi.CreationTime.ToString();
+                FileDate = fi.CreationTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
         catch (Exception ex){

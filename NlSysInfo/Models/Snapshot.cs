@@ -31,13 +31,13 @@ public class Snapshot{
         }
         Name = name;
         Filename = filename;
-        Created = DateTime.Now.ToString();
+        Created = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         try{
             if (Filename != null && Filename != String.Empty){
                 if (File.Exists(Filename)){
                     FileInfo fi = new FileInfo(Filename);
                     FileSize = fi.Length;
-                    FileDate = fi.CreationTime.ToString();
+                    FileDate = fi.CreationTime.ToString("yyyy-MM-dd HH:mm:ss");
                 }
             }
         }

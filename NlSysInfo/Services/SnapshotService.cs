@@ -9,7 +9,7 @@ public class SnapshotService{
     }
 
     public bool SaveAllProcs(int [] allProcIds){
-        var snapshotCreated = DateTime.Now.ToString();
+        var snapshotCreated = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         foreach (int pid in allProcIds){
             Console.WriteLine($"** Saving ProcId: {pid}");
             
