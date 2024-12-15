@@ -8,9 +8,9 @@ public class EnvironmentServiceTest{
 
     [Fact]
     public void GetSpecialFoldersTest(){
-        EnvironmentSerivce es = new();
+        EnvironmentService es = new();
         var retVal = es.GetSpecialFolders();
-        Console.WriteLine(retVal);
-        Assert.Equal("", retVal);
+        Console.WriteLine($"{retVal}");
+        Assert.NotEqual("", retVal);
     }
 }
