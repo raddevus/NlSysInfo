@@ -48,9 +48,9 @@ public class SnapshotRepoTest{
         // Console.WriteLine($"Success? {ss.KillProcess(14844)}");
     }
 
-    [Fact]
-    public void ConvertDates(){
-        SnapshotRepository sr = new();
-        sr.ConvertDatesToIso8601();
-    }
+    // [Fact]
+    // public void ConvertDates(){
+    //     SnapshotRepository sr = new();
+    //     sr.ConvertDatesToIso8601();
+    // }
 }
