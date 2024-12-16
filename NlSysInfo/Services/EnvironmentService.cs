@@ -17,4 +17,8 @@ public class EnvironmentService{
         }
         return JsonSerializer.Serialize(specialFoldersOut);
     }
+
+    public String GetAllEnvVars(){
+        return JsonSerializer.Serialize(Environment.GetEnvironmentVariables());
+    }
 }
