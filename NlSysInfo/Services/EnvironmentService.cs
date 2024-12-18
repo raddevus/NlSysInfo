@@ -1,5 +1,8 @@
 namespace NewLibre;
+
+using System.Collections;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 public class EnvironmentService{
 
@@ -19,6 +22,10 @@ public class EnvironmentService{
     }
 
     public String GetAllEnvVars(){
-        return JsonSerializer.Serialize(Environment.GetEnvironmentVariables());
+        List<object> allEnvVars = new();
+        foreach (DictionaryEntry de in Environment.GetEnvironmentVariables()){
+            allEnvVars.Add(new {name=de.Key, value=de.Value});
+        }
+        return JsonSerializer.Serialize(allEnvVars);
     }
 }

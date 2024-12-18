@@ -13,4 +13,12 @@ public class EnvironmentServiceTest{
         Console.WriteLine($"{retVal}");
         Assert.NotEqual("", retVal);
     }
+
+    [Fact]
+    public void GetAllEnvVarsTest(){
+        EnvironmentService es = new();
+        var retVal = es.GetAllEnvVars();
+        Console.WriteLine($"{retVal}");
+        Assert.NotEqual("", retVal);
+    }
 }
