@@ -22,7 +22,7 @@ public class Snapshot{
     }
     public Snapshot(String name, String filename)
     {
-        name = name.Trim();
+        name = name.Trim().ToLower();
         if (!String.IsNullOrEmpty(name)){
             var endIdx = name.IndexOf(' ');
             if (endIdx > 0){

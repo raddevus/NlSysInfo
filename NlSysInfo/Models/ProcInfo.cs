@@ -16,7 +16,7 @@ public class ProcInfo{
 
     public ProcInfo(String name, String filename, int procId)
     {
-        name = name.Trim();
+        name = name.Trim().ToLower();
         if (!String.IsNullOrEmpty(name)){
             var endIdx = name.IndexOf(' ');
             if (endIdx > 0){

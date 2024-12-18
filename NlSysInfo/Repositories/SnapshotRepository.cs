@@ -9,7 +9,7 @@ public class SnapshotRepository{
 
     public string GetMatchingSnapshotsByName(string name){
         SnapshotContext sc = new SnapshotContext();
-        var allItems = sc.Snapshot.Where<Snapshot>(s => s.Name == name).OrderBy<Snapshot, string>(a => a.Created ).ToList<Snapshot>();
+        var allItems = sc.Snapshot.Where<Snapshot>(s => s.Name.ToLower() == name.ToLower()).OrderBy<Snapshot, string>(a => a.Created ).ToList<Snapshot>();
         
         Console.WriteLine($"{allItems}");
         Console.WriteLine($"{allItems.Count()}");
