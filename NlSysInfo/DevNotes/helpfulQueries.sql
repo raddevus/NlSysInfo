@@ -14,8 +14,8 @@ WITH CompareProcs(name,file) AS
     WITH CompareProcs(name,file) AS 
 (
     SELECT name, filehash from snapshot where 
-    created = (select max(created) from snapshot)
-    ) select name, filehash from snapshot where created = '11/26/2024 9:59:51 PM' 
+    created = '2024-12-19 14:19:37' 
+    ) select name, filehash from snapshot where created = (select max(created) from snapshot)
     and name not in (select name from CompareProcs);
 
 -- checks for duplicates on the max created entries
