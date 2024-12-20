@@ -21,4 +21,20 @@ public class EnvironmentServiceTest{
         Console.WriteLine($"{retVal}");
         Assert.NotEqual("", retVal);
     }
+
+    [Fact]
+    public void StartNewProcTestNoArgs(){
+        EnvironmentService es = new();
+        
+        es.StartProcess("/opt/microsoft/msedge/msedge");
+
+    }
+
+    [Fact]
+    public void StartNewProcTestWithURL(){
+        EnvironmentService es = new();
+        
+        es.StartProcess("/opt/microsoft/msedge/msedge","https://stackoverflow.com/questions/47658250/return-jsx-from-function");
+
+    }
 }

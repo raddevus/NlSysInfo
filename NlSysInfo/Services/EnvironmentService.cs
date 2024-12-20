@@ -1,8 +1,8 @@
-namespace NewLibre;
-
 using System.Collections;
 using System.Text.Json;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Diagnostics;
+
+namespace NewLibre;
 
 public class EnvironmentService{
 
@@ -27,5 +27,19 @@ public class EnvironmentService{
             allEnvVars.Add(new {name=de.Key, value=de.Value});
         }
         return JsonSerializer.Serialize(allEnvVars);
+    }
+
+    public bool StartProcess(string appFilePath, string args = ""){
+        if (!File.Exists(appFilePath)){
+            // cannot start the app, because exe file
+            // doesn't seem to exist
+            return false;
+        }
+        Process p = new Process();
+        p.StartInfo.FileName = appFilePath;
+        p.StartInfo.Arguments = args;
+        p.Start();
+        Console.WriteLine($"process ID: {p.Id}, sessionId : {p.SessionId}");
+        return true;
     }
 }
