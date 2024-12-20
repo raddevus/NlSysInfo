@@ -18,8 +18,11 @@ public class DbTest
         if (File.Exists("/usr/bin/bash")){
            pi = new ("linux-1", "/usr/bin/bash", 1);
         }
-        else{
+        else if (File.Exists("/bin/zsh")){
             pi = new ("macOS-1","/bin/zsh",2);
+        }
+        else{
+            pi = new ("winOS-1", "C:\\Windows\\system32\\conhost.exe",3);
         }
         ProcInfoContext pic = new();
         pic.Add(pi);
@@ -32,8 +35,11 @@ public class DbTest
         if (File.Exists("/usr/bin/bash")){
            pi = new ("linux-1", "/usr/bin/bash", 1);
         }
-        else{
+        else if (File.Exists("/bin/zsh")){
             pi = new ("macOS-1","/bin/zsh",2);
+        }
+        else{
+            pi = new ("winOS-1", "C:\\Windows\\system32\\conhost.exe",3);
         }
         ProcInfoContext pic = new();
         pi.GenSha256Hash();

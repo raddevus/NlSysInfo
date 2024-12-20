@@ -14,8 +14,11 @@ public class SnapshotRepoTest{
         if (File.Exists("/usr/bin/bash")){
            targetProcName = "bash";
         }
-        else{
+        else if (File.Exists("/bin/zsh")){
             targetProcName = "zsh";
+        }
+        else{
+            targetProcName = "C:\\Windows\\system32\\conhost.exe";
         }
 
         List<ProcInfo> pi = JsonSerializer.Deserialize<List<ProcInfo>>(sr.GetMatchingSnapshotsByName(targetProcName));
