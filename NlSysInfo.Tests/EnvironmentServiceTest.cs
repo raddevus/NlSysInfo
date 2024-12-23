@@ -35,6 +35,7 @@ public class EnvironmentServiceTest{
         EnvironmentService es = new();
         
         es.StartProcess("/opt/microsoft/msedge/msedge","https://stackoverflow.com/questions/47658250/return-jsx-from-function");
+        es.StartProcess("/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge","https://newlibre.com");
 
     }
 }
