@@ -29,17 +29,18 @@ public class EnvironmentService{
         return JsonSerializer.Serialize(allEnvVars);
     }
 
-    public bool StartProcess(string appFilePath, string args = ""){
+    public Int32 StartProcess(string appFilePath, string args = ""){
         if (!File.Exists(appFilePath)){
             // cannot start the app, because exe file
             // doesn't seem to exist
-            return false;
+            // returns -1 for failure since PIDs will be >= 0
+            return -1;
         }
         Process p = new Process();
         p.StartInfo.FileName = appFilePath;
         p.StartInfo.Arguments = args;
         p.Start();
         Console.WriteLine($"process ID: {p.Id}, sessionId : {p.SessionId}");
-        return true;
+        return p.Id;
     }
 }

@@ -26,7 +26,13 @@ public class EnvironmentServiceTest{
     public void StartNewProcTestNoArgs(){
         EnvironmentService es = new();
         
-        es.StartProcess("/opt/microsoft/msedge/msedge");
+        var pid = es.StartProcess("/opt/microsoft/msedge/msedge");
+        if (pid == -1){
+            pid = es.StartProcess("/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge");
+        }
+        // System.Threading.Thread.Sleep(2000);
+        // SnapshotService ss = new();
+        // ss.KillProcess(pid);
 
     }
 
@@ -34,8 +40,13 @@ public class EnvironmentServiceTest{
     public void StartNewProcTestWithURL(){
         EnvironmentService es = new();
         
-        es.StartProcess("/opt/microsoft/msedge/msedge","https://stackoverflow.com/questions/47658250/return-jsx-from-function");
-        es.StartProcess("/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge","https://newlibre.com");
-
+        var pid = es.StartProcess("/opt/microsoft/msedge/msedge","https://stackoverflow.com/questions/47658250/return-jsx-from-function");
+        if (pid == -1){
+            pid = es.StartProcess("/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge","https://newlibre.com");
+        }
+        // System.Threading.Thread.Sleep(2000);
+        // SnapshotService ss = new();
+        // ss.KillProcess(pid);
+        
     }
 }
