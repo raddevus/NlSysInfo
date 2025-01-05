@@ -13,6 +13,15 @@ public class UnitTest1
     }
 
     [Fact]
+    public void GetAllProcsAsJson(){
+        SystemInfo si = new();
+        var allProcs = si.GetAllProcessesAsJson();
+        Console.WriteLine(allProcs);
+        Assert.NotEqual("",allProcs);
+
+    }
+
+    [Fact]
     public void TestProcInfo(){
         SystemInfo si = new();
         List<ProcInfo> allPI = si.GetAllProcesses();
