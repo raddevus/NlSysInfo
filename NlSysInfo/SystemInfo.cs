@@ -1,23 +1,25 @@
 ﻿using System.Diagnostics;
+using System.Text.Json;
 namespace NewLibre;
 
 public class SystemInfo
 {
 
     // The class to handle the management of executble processes.
-    public List<string> GetAllProcNames(){
+    public string GetAllProcNames(){
         Process [] allProcs = Process.GetProcesses();
-        List<string> sl = new List<string>();
+        List<object> sl = new List<object>();
+        
         foreach (Process p in allProcs)
         {
             var stopChar = p.ProcessName.IndexOf(" ");
             if (stopChar < 1){
                 stopChar = p.ProcessName.Length;
             }
-            sl.Add($"{p.ProcessName.Substring(0,stopChar)}:{p.Id}");
+            sl.Add(new {procName=$"{p.ProcessName.Substring(0,stopChar)}",pid=p.Id});
         }
-        sl.Sort();
-        return sl;
+        // sl.Sort((pi1, pi2) => pi1.procName.CompareTo( pi2.ProcName));
+        return JsonSerializer.Serialize(sl);
     }
 
     public List<ProcInfo> GetAllProcesses(){

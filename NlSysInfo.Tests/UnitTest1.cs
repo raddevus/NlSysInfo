@@ -7,11 +7,9 @@ public class UnitTest1
     public void TestProcNames()
     {
         SystemInfo si = new();
-        List<string> allNames = si.GetAllProcNames();
-        foreach (string s in allNames){
-            Console.Write($"{s}, ");
-        }
-        // Assert.Contains("teams:5275",allNames);
+        var allProcNames = si.GetAllProcNames();
+        Console.WriteLine($"Got {allProcNames.Count()} procs. \n{allProcNames}");
+        Assert.NotEqual("", allProcNames);
     }
 
     [Fact]
