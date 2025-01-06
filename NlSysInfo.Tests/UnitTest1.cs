@@ -44,4 +44,15 @@ public class UnitTest1
         SystemInfo si = new();
         si.DisplayMainWindowTitle(18634);
     }
+
+    [Fact]
+    public void GetProcModules(){
+        SystemInfo si = new();
+        long totalMemSize = 0;
+        string jsonresult = String.Empty;
+        (totalMemSize, jsonresult) = si.GetAllProcModules(5968);
+
+        Console.WriteLine($"{totalMemSize}\n{jsonresult}");
+
+    }
 }

@@ -62,18 +62,23 @@ public class SystemInfo
         return JsonSerializer.Serialize(allProcInfo);
     }
 
-    public List<string> GetAllProcModules(string targetProcName){
+    public (long, string) GetAllProcModules(int pid){
         // Get all the modules that a specific process loads
         Process [] allProcs = Process.GetProcesses();
-        foreach (Process p in allProcs){
-            if (p.ProcessName == targetProcName){
-                ProcessModuleCollection allModules = p.Modules;
-                foreach (ProcessModule pm in allModules){
-                    Console.WriteLine(pm.ModuleName);
-                }
+        List<object> modulesResult = new ();
+        var targetProcess = allProcs.First(p => p.Id == pid);
+        long totalMemSize = 0;
+        // Protecting in case a bad pid is sent in
+        if (targetProcess != null){
+            ProcessModuleCollection allModules = targetProcess.Modules;
+            foreach (ProcessModule pm in allModules){
+                Console.WriteLine($"{pm.ModuleName} : {pm.FileName} : {pm.ModuleMemorySize}");
+                modulesResult.Add(new {moduleName=pm.ModuleName, fileName=pm.FileName,  memorySize=pm.ModuleMemorySize});
+                totalMemSize += pm.ModuleMemorySize;
             }
         }
-        return new List<string>();
+        Console.WriteLine($"Modules take up {totalMemSize} bytes of memory.");
+        return (totalMemSize,JsonSerializer.Serialize(modulesResult));
     }
 
     public void DisplayMainWindowTitle(int procId){
