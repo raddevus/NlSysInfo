@@ -48,11 +48,11 @@ public class UnitTest1
     [Fact]
     public void GetProcModules(){
         SystemInfo si = new();
-        long totalMemSize = 0;
+        
         string jsonresult = String.Empty;
-        (totalMemSize, jsonresult) = si.GetAllProcModules(5968);
+        jsonresult = si.GetAllProcModules(19291);
 
-        Console.WriteLine($"{totalMemSize}\n{jsonresult}");
+        Console.WriteLine($"{jsonresult}");
 
     }
 }

@@ -62,7 +62,7 @@ public class SystemInfo
         return JsonSerializer.Serialize(allProcInfo);
     }
 
-    public (long, string) GetAllProcModules(int pid){
+    public string GetAllProcModules(int pid){
         // Get all the modules that a specific process loads
         Process [] allProcs = Process.GetProcesses();
         List<object> modulesResult = new ();
@@ -77,8 +77,9 @@ public class SystemInfo
                 totalMemSize += pm.ModuleMemorySize;
             }
         }
+        var outResult = new {totalMemSize=totalMemSize,modules=modulesResult};
         Console.WriteLine($"Modules take up {totalMemSize} bytes of memory.");
-        return (totalMemSize,JsonSerializer.Serialize(modulesResult));
+        return JsonSerializer.Serialize(outResult);
     }
 
     public void DisplayMainWindowTitle(int procId){
