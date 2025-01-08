@@ -1,6 +1,7 @@
 namespace NewLibre;
 
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -38,8 +39,33 @@ public class SnapshotRepository{
         // ### (ie - never been captured in snapshot in the past)
         SnapshotContext sc = new SnapshotContext();
         var allDistinctSnap = sc.Snapshot.Select(s => s.Name).Distinct();
-        //Console.WriteLine($"{allDistinctSnap.Count()}");
-        var retVal = JsonSerializer.Serialize(allDistinctSnap);
+        List<string> allUniqueProcNames = new();
+        foreach (string s in allDistinctSnap){
+            allUniqueProcNames.Add(s.ToLower());
+        }
+                
+        SystemInfo si = new ();
+        var allProcInfo = si.GetAllProcesses();
+        HashSet<string> currentProcNames = new();
+
+        foreach (ProcInfo p in allProcInfo){
+            // if we couldn't get a filehash then 
+            // we don't track the process
+            if (!String.IsNullOrEmpty(p.Filename)){
+                currentProcNames.Add(p.Name.ToLower());
+            }
+        }
+        Console.WriteLine($"proc Count: {currentProcNames.Count()}");
+        foreach (string s in allUniqueProcNames){
+            allProcInfo.Find(pi =>  {
+                if (pi.Name.ToLower() == s){
+                    currentProcNames.Remove(s);
+                }
+                return pi.Name == s;
+            });
+        }
+        Console.WriteLine($"proc Count: {currentProcNames.Count()}");
+        var retVal = JsonSerializer.Serialize(currentProcNames);
         Console.WriteLine($"{retVal}");
         return retVal;
     }
