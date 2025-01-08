@@ -39,6 +39,12 @@ public class SnapshotRepoTest{
     }
 
     [Fact]
+    public void GetNewProcessesTest(){
+        SnapshotRepository sr = new();
+        Console.WriteLine($"{sr.GetNewProcesses()}");
+    }
+
+    [Fact]
     public void KillProcessTest(){
         // ### More to be done later, because
         // ### this test requires the valid procId of a process

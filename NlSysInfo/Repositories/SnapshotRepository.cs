@@ -31,6 +31,18 @@ public class SnapshotRepository{
         return jsonObject;
     }
 
+    public string GetNewProcesses(){
+        // ### Returns json list of ProcInfo that have never
+        // ### been seen before.   Allows user to say,
+        // ### What is running right now that has never ran in past?
+        // ### (ie - never been captured in snapshot in the past)
+        SnapshotContext sc = new SnapshotContext();
+        var allDistinctSnap = sc.Snapshot.Select(s => s.Name).Distinct();
+        //Console.WriteLine($"{allDistinctSnap.Count()}");
+        var retVal = JsonSerializer.Serialize(allDistinctSnap);
+        Console.WriteLine($"{retVal}");
+        return retVal;
+    }
     public void ConvertDatesToIso8601(){
         SnapshotContext sc = new();
         var allRows = sc.Snapshot.Where<Snapshot>(s => s.Id > 0);
