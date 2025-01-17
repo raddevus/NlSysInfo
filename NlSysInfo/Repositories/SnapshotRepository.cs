@@ -39,34 +39,43 @@ public class SnapshotRepository{
         // ### (ie - never been captured in snapshot in the past)
         SnapshotContext sc = new SnapshotContext();
         var allDistinctSnap = sc.Snapshot.Select(s => s.Name).Distinct();
-        List<string> allUniqueProcNames = new();
+        HashSet<string> allUniqueProcNames = new();
         foreach (string s in allDistinctSnap){
-            allUniqueProcNames.Add(s.ToLower());
+            // ### NOTE: Trim() bec processes in memory
+            // can have names with leading / trailing spaces! 🤯
+            allUniqueProcNames.Add(s.Trim().ToLower());
         }
                 
         SystemInfo si = new ();
         var allProcInfo = si.GetAllProcesses();
-        HashSet<string> currentProcNames = new();
+        HashSet<ProcInfo> currentProcNames = new();
+
+        List<String> capturedProcs = new();
 
         foreach (ProcInfo p in allProcInfo){
             // if we couldn't get a filehash then 
             // we don't track the process
-            if (!String.IsNullOrEmpty(p.Filename)){
-                currentProcNames.Add(p.Name.ToLower());
+            // ##### NOTE: There was a space in the proc name 
+            // and it was capturing the process twice even
+            // tho it looke like it was named the same
+            if (!capturedProcs.Contains(p.Name.Trim().ToLower()) && !String.IsNullOrEmpty(p.Filename)){
+                currentProcNames.Add(p);
+                capturedProcs.Add(p.Name.Trim().ToLower());
             }
         }
         Console.WriteLine($"proc Count: {currentProcNames.Count()}");
         foreach (string s in allUniqueProcNames){
             allProcInfo.Find(pi =>  {
-                if (pi.Name.ToLower() == s){
-                    currentProcNames.Remove(s);
+                if (pi.Name.ToLower() == s.ToLower()){
+                    currentProcNames.Remove(pi);
+                    Console.WriteLine($"Removing : {s}");
                 }
                 return pi.Name == s;
             });
         }
         Console.WriteLine($"proc Count: {currentProcNames.Count()}");
         var retVal = JsonSerializer.Serialize(currentProcNames);
-        Console.WriteLine($"{retVal}");
+        //Console.WriteLine($"{retVal}");
         return retVal;
     }
     public void ConvertDatesToIso8601(){
