@@ -1,7 +1,9 @@
 namespace NewLibre;
 
+using System.Collections.Immutable;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -73,8 +75,12 @@ public class SnapshotRepository{
                 return pi.Name == s;
             });
         }
+        // have to create a list so we can sort it
+        List<ProcInfo> allpi = currentProcNames.ToList();
+        // This is reverse sort order (z to a)
+        allpi.Sort((x, y) => y.Name.CompareTo(x.Name));
         Console.WriteLine($"proc Count: {currentProcNames.Count()}");
-        var retVal = JsonSerializer.Serialize(currentProcNames);
+        var retVal = JsonSerializer.Serialize(allpi);
         //Console.WriteLine($"{retVal}");
         return retVal;
     }
