@@ -55,12 +55,12 @@ public class SnapshotRepository{
         List<String> capturedProcs = new();
 
         foreach (ProcInfo p in allProcInfo){
-            // if we couldn't get a filehash then 
-            // we don't track the process
             // ##### NOTE: There was a space in the proc name 
             // and it was capturing the process twice even
             // tho it looke like it was named the same
             if (!capturedProcs.Contains(p.Name.Trim().ToLower()) && !String.IsNullOrEmpty(p.Filename)){
+                // Gen the sha256 for the new procs.
+                p.GenSha256Hash();
                 currentProcNames.Add(p);
                 capturedProcs.Add(p.Name.Trim().ToLower());
             }
