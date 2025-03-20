@@ -26,6 +26,11 @@ public class EnvironmentService{
         foreach (DictionaryEntry de in Environment.GetEnvironmentVariables()){
             allEnvVars.Add(new {name=de.Key, value=de.Value});
         }
+        // sort the env. vars before returning.
+        allEnvVars = allEnvVars
+         .Cast<dynamic>() // Cast to dynamic to access the properties of anonymous types
+        .OrderBy(obj => obj.name)
+        .ToList();
         return JsonSerializer.Serialize(allEnvVars);
     }
 
