@@ -17,6 +17,12 @@ The sqlite filename is: `nlsysinfo.db`
 To run the tests, just use : `$ dotnet test`<br/>
 If you want to run a specific test use : `$ dotnet test --filter DbTest.<name-of-test>`
 
+### Get All The Environment Vars As JSON
+Run the following from the NlSysInfo.Tests project folder:<br>
+`dotnet test --filter EnvironmentServiceTest.GetAllEnvVarsTest`
+
+That will return all of the Environment Vars in a JSON array with name / value pairs.
+
 ## Using NlSysInfo With DiscoProcs
 If you're using this DLL with DiscoProcs then you will need to :
 1) get the DiscoProcs source (repo link above)
